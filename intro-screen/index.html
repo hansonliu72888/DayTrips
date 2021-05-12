@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <script src="smiles.js"></script>
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Day Trips</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header></header>
+      <img id="crosswalk" src="images/crosswalk4.jpg" alt="Background Image" />
+
+      <nav>
+        <a href="#">Home &nbsp &nbsp &nbsp &nbsp</a>
+        <a href="#">Destinations &nbsp &nbsp &nbsp &nbsp</a>
+        <a href="#">How It Works &nbsp &nbsp &nbsp &nbsp</a>
+        <a href="#">Contact Us &nbsp &nbsp &nbsp &nbsp</a>
+        <a href="#">About &nbsp &nbsp &nbsp &nbsp</a>
+      </nav>
+
+      <main>
+        <h3 id="header 3">Welcome to</h3>
+        <h1 id="header1">DayTrips</h1>
+        <input
+          list="locations"
+          id="mySearch"
+          onkeyup="myFunction()"
+          placeholder="Find a city..."
+          title="Type in a category"
+        />
+        <button id="submit" href="../main.html">
+          <a href="../main.html" id="goLink">Go!</a>
+        </button>
+        <datalist id="locations">
+          <option value="Toronto"> </option>
+          <option value="Montreal"> </option>
+          <option value="Vancouver"> </option>
+          <option value="Calgary"> </option>
+          <option value="Edmonton"> </option>
+        </datalist>
+
+        <p id="yeet"></p>
+        <h2>Find. Schedule. Go!</h2>
+        <p>
+          Plan and schedule your trips with Day Trips, a website that puts the
+          places you want to visit into a simple and seamless schedule and route
+          so you can have enough time to actually visit all the places you want
+          to go in the day.
+        </p>
+      </main>
+
+      <footer>
+        <a
+          class="Places"
+          href="https://theculturetrip.com/north-america/canada/articles/20-must-visit-attractions-in-toronto/"
+          target="bl"
+          >Toronto Attractions &nbsp &nbsp &nbsp &nbsp</a
+        >
+        <a
+          class="Places"
+          href="https://theculturetrip.com/north-america/canada/quebec/articles/20-must-visit-attractions-in-montreal/"
+          target="bl"
+          >Montreal Attractions &nbsp &nbsp &nbsp &nbsp</a
+        >
+        <a
+          class="Places"
+          href="https://theculturetrip.com/north-america/canada/articles/20-must-visit-attractions-in-vancouver/"
+          target="bl"
+          >Vancouver Attractions &nbsp &nbsp &nbsp &nbsp</a
+        >
+        <a
+          class="Places"
+          href="https://theculturetrip.com/north-america/canada/articles/the-top-10-things-to-do-and-see-in-calgary/"
+          target="bl"
+          >Calgary Attractions &nbsp &nbsp &nbsp &nbsp</a
+        >
+        <a
+          class="Places"
+          href="https://theculturetrip.com/north-america/canada/articles/the-top-10-things-to-do-and-see-in-edmonton/"
+          target="bl"
+          >Edmonton Attractions &nbsp &nbsp &nbsp &nbsp</a
+        >
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link
+    rel="stylesheet"
+    href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+  />
+  <link rel="stylesheet" href="./main.css" />
+  <script src="./main.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 4;">
+        <a class="navbar-brand" href="#">DayTrips</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" style="padding-left: 10px;">
+              <a class="nav-link" href="#">Trips<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" style="padding-left: 10px;">
+              <a class="nav-link" href="#">Plan</a>
+            </li>
+            <li class="nav-item" style="padding-left: 10px;">
+              <a class="nav-link" href="#">Explore</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <body>
+
+  <div id="floating-panel">
+      <b>Start: </b>
+      <select id="start">
+        <option value="CN Tower">CN Tower</option>
+        <option value="Royal Ontario Museum">Royal Ontario Museum</option>
+        <option value="Art Gallery of Ontario">Art Gallery of Ontario</option>
+        <option value="Grafitti Alley">Grafitti Alley</option>
+        <option value="CF Toronto Eaton Centre">CF Toronto Eaton Center</option>
+      </select>
+
+        <b> &nbsp &nbsp &nbsp &nbsp &nbsp Destinations: </b>
+        <select multiple id = "waypoints" style="height: 3.8rem;">
+          <option value="CN Tower">CN Tower</option>
+          <option value="Royal Ontario Museum">Royal Ontario Museum</option>
+          <option value="Art Gallery of Ontario">Art Gallery of Ontario</option>
+          <option value="Grafitti Alley">Grafitti Alley</option>
+          <option value="CF Toronto Eaton Centre">CF Toronto Eaton Center</option>
+        </select>
+
+      <b>&nbsp &nbsp &nbsp &nbsp &nbsp End: </b>
+      <select id="end">
+          <option value="CN Tower">CN Tower</option>
+          <option value="Royal Ontario Museum">Royal Ontario Museum</option>
+          <option value="Art Gallery of Ontario">Art Gallery of Ontario</option>
+          <option value="Graffiti Alley">Grafitti Alley</option>
+          <option value="CF Toronto Eaton Centre">CF Toronto Eaton Center</option>
+        </select>
+
+        <input type="submit" id="submit">
+
+        <p style="padding-top: 12px;">To select multiple destinations, use ctrl+click or cmd+click.</p>
+
+      </div>
+         <div id="map"></div>
+       <div id="directions-panel" style="max-width:290px; padding-top: 0px; padding-left: 20px;">
+      <h3>
+        Toronto Day Trip
+      </h3>
+    </div>
+         <script>
+            function initMap() {
+
+          var directionsService = new google.maps.DirectionsService;
+          var directionsRenderer = new google.maps.DirectionsRenderer;
+          var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: 43.85, lng: -79.65}
+        });
+        directionsRenderer.setMap(map);
+
+        document.getElementById('submit').addEventListener('click', function() {
+          calculateAndDisplayRoute(directionsService, directionsRenderer);
+        });
+      }
+
+      function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+        var waypts = [];
+        var checkboxArray = document.getElementById('waypoints');
+        for (var i = 0; i < checkboxArray.length; i++) {
+          if (checkboxArray.options[i].selected) {
+            waypts.push({
+              location: checkboxArray[i].value,
+              stopover: true
+            });
+          }
+        }
+
+        directionsService.route({
+          origin: document.getElementById('start').value,
+          destination: document.getElementById('end').value,
+          waypoints: waypts,
+          optimizeWaypoints: true,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsRenderer.setDirections(response);
+            var route = response.routes[0];
+            var summaryPanel = document.getElementById('directions-panel');			
+            // summaryPanel.innerHTML = '';
+            var lastDestination = [];
+            // For each route, display summary information.
+            for (var i = 0; i < route.legs.length; i++) {
+              
+              var routeSegment = i + 1;
+              // summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+              //     '</b><br>';
+              if (route.legs[i].start_address == "290 Bremner Blvd, Toronto, ON M5V 3L9, Canada") {
+                summaryPanel.innerHTML += (i+1) + '. ' + "CN Tower - " + route.legs[i].start_address + '<br><br>'
+              } else if (route.legs[i].start_address == "Graffiti Alley, Toronto, ON M5V, Canada") {
+                summaryPanel.innerHTML += (i+1) + '. ' + "CN Tower - " + route.legs[i].start_address + '<br><br>'
+              } else if (route.legs[i].start_address == "317 Dundas St W, Toronto, ON M5T 1G4, Canada") {
+                summaryPanel.innerHTML += (i+1) + '. ' + "Art Gallery of Ontario - " + route.legs[i].start_address + '<br><br>'
+              } else if (route.legs[i].start_address == "220 Yonge St, Toronto, ON M5B 2H1, Canada") {
+                summaryPanel.innerHTML += (i+1) + '. ' + "CF Toronto Eaton Centre - " + route.legs[i].start_address + '<br><br>'
+              } else {
+                summaryPanel.innerHTML += (i+1) + '. ' + "Royal Ontario Museum - " + route.legs[i].start_address + '<br><br>'
+              }
+              
+              lastDestination.push(route.legs[i].end_address);
+              console.log(route.legs[i].end_address);
+                          
+              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+              
+              
+            }
+            console.log(lastDestination);
+            var actualLastDestination = lastDestination[route.legs.length-1];
+            if (actualLastDestination == "290 Bremner Blvd, Toronto, ON M5V 3L9, Canada") {
+                summaryPanel.innerHTML += (i+1) + '. ' + "CN Tower - " + actualLastDestination + '<br><br>'
+              } else if (actualLastDestination == "Graffiti Alley, Toronto, ON M5V, Canada") {
+                summaryPanel.innerHTML += (i+1) + '. ' + "CN Tower - " + actualLastDestination + '<br><br>'
+              } else if (actualLastDestination == "317 Dundas St W, Toronto, ON M5T 1G4, Canada") {
+                summaryPanel.innerHTML += (i+1) + '. ' + "Art Gallery of Ontario - " + actualLastDestination + '<br><br>'
+              } else if (actualLastDestination == "220 Yonge St, Toronto, ON M5B 2H1, Canada") {
+                summaryPanel.innerHTML += (i+1) + '. ' + "CF Toronto Eaton Centre - " + actualLastDestination + '<br><br>'
+              } else {
+                summaryPanel.innerHTML += (i+1) + '. ' + "Royal Ontario Museum - " + actualLastDestination + '<br><br>'
+              }
+            // summaryPanel.innerHTML += lastDestination[route.legs.length-1];
+
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+        
+  var e = document.getElementById("start").value;
+  console.log(e);
+      </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYi6l1KZvBbw63AdacfyyA3bxKyDZtLJU&callback=initMap">
+  
+
+  
+      </script>
+  <h1></h1>
+  </div>
+</body>

@@ -1,0 +1,119 @@
+html {
+  height: 100%;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.301);
+  background-image: url(images/crosswalk4.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1024px;
+}
+
+header {
+  height: 118px;
+  text-align: center;
+}
+
+nav {
+  background-color: rgba(0, 0, 0, 0.301);
+  text-align: center;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+s main {
+  height: 400px;
+  text-align: center;
+  padding-top: 80px;
+  padding-left: 240px;
+  padding-right: 240px;
+}
+
+footer {
+  background-color: rgba(0, 0, 0, 0.301);
+  text-align: center;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+h1 {
+  font-size: 120px;
+  color: rgb(255, 255, 255);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: center;
+}
+h2 {
+  font-size: 80px;
+  color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: center;
+  text-shadow: 5px 5px black;
+}
+
+h3 {
+  font-size: 60px;
+  color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: center;
+  text-shadow: 4px 4px black;
+}
+
+p {
+  font-size: 20px;
+  color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: center;
+}
+
+a {
+  color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+#crosswalk {
+  width: 100vw;
+  height: 1000px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+#header1 {
+  margin-top: 70px;
+  text-shadow: 6px 6px black;
+}
+
+nav a {
+  text-decoration: none;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#mySearch {
+  width: 90%;
+  font-size: 18px;
+  padding: 11px;
+  border: 1px solid #ddd;
+}
+
+#submit {
+  height: 44px;
+}
+
+#goLink {
+  color: black;
+  text-decoration: none;
+}
+.Places {
+  text-decoration: none;
+  margin-left: 10px;
+  margin-right: 10px;
+}
